@@ -17,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::view('login-user', 'login-form')->middleware('guest');
+// Route::get('/', function () {
+//     return view('index');
+// });
+Route::view('/', 'index');
+Route::view('login', 'login')->middleware('guest');
 Route::post('login', LoginController::class);
 Route::post('signup', RegisterUserController::class);
 Route::get('logout', LogoutController::class);
