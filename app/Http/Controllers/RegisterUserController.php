@@ -24,6 +24,6 @@ class RegisterUserController extends Controller
         $newUser->save();
         Auth::login($newUser);
 
-        return redirect('/');
+        return redirect()->intended('/');
     }
 }
