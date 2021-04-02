@@ -9,12 +9,14 @@ class LoginController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $credentiels = $request->only(['email', 'password']);
+        $credentials = $request->only(['email', 'password']);
 
-        if (Auth::attempt($credentiels)) {
-            return redirect('/');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/');
         }
 
-        return back();
+        return redirect('login')->withErrors("Something went wrong");
     }
 }
