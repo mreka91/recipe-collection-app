@@ -12,7 +12,7 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_view_login_signup_form()
+    public function test_view_login_form()
     {
         $response = $this->get('login');
         $response->assertViewIs('login');
@@ -27,6 +27,7 @@ class LoginTest extends TestCase
             "email" => $user->email,
             "password" => 'password',
         ]);
+        $this->assertAuthenticatedAs($user);
         $response->assertViewIs('index');
         $response->assertSeeText("Hello $user->name!");
     }
@@ -38,6 +39,7 @@ class LoginTest extends TestCase
             'email' => $user->email,
             'password' => 'wordpass',
         ]);
+        $this->assertGuest();
         $response->assertViewIs('login');
         $response->assertSeeText("Something went wrong");
     }
@@ -46,9 +48,10 @@ class LoginTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this->followingRedirects()->post('login', [
-            'email' => "typo$user->email.typo",
+            'email' => "typo.$user->email.typo",
             'password' => 'password',
         ]);
+        $this->assertGuest();
         $response->assertViewIs('login');
         $response->assertSeeText("Something went wrong");
     }
