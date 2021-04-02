@@ -11,3 +11,6 @@
     <button type="submit">Sign up</button>
 </form>
 @include('errors')
+@if(Route::has('login'))
+    <a href="login">Click here to login</a>
+@endif
