@@ -1,49 +1,37 @@
-@extends('layout')
-@section('content')
-@if (Route::has('login'))
-    <div>
-        @auth
-            <p>Hello {{Auth::user()->name}}!</p>
-            <a href="logout">Click here to logout</a>
-        @else
-            <a href="login">Click here to login</a>
-        @endauth
-    </div>
-@endif
-
-@if (Route::has('create-recipe'))
-    @auth
-        <form action="create-recipe" method="post">
-            @csrf
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title">
-            <label for="content">Content</label>
-            <textarea id="content" name="content"></textarea>
-            <button type="submit">Add recipe</button>
-        </form>
-    @endauth
-@endif
-
-@foreach ($recipes as $recipe)
-    <h2>{{$recipe->title}}</h2>
-    <p>{{$recipe->content}}</p>
-    @auth
-        @if (Auth::id() === $recipe->user_id)
-            <form action="/recipes/{{$recipe->id}}/edit" method="post">
-                @csrf
-                @method('put')
-                <label for="title">Title</label>
-                <input type="text" name="title" id="title" value="{{$recipe->title}}">
-                <label for="content">Content</label>
-                <textarea id="content" name="content">{{$recipe->content}}</textarea>
-                <button type="submit">Edit recipe</button>
-            </form>
-            <form action="/recipes/{{$recipe->id}}/delete" method="post">
-                @csrf
-                @method('delete')
-                <button type="submit">Delete recipe</button>
-            </form>
+<x-layout>
+    <x-navigation/>
+    <main>
+        @if (Route::has('create-recipe'))
+            @auth
+                <div>
+                    <x-form action="create-recipe" buttonText="Add recipe">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" id="title">
+                        <label for="content">Content</label>
+                        <textarea id="content" name="content"></textarea>
+                    </x-form>
+                </div>
+            @endauth
         @endif
-    @endauth
-@endforeach
-@endsection
+        <section class="recipes">
+            @foreach ($recipes as $recipe)
+                <x-recipe>
+                    <h2>{{$recipe->title}}</h2>
+                    <p>{{$recipe->content}}</p>
+                    @if(Auth::id() === $recipe->user_id)
+                        <x-form action="/recipes/{{$recipe->id}}/edit" buttonText="Edit recipe">
+                            @method('put')
+                            <label for="title">Title</label>
+                            <input type="text" name="title" id="title" value="{{$recipe->title}}">
+                            <label for="content">Content</label>
+                            <textarea id="content" name="content">{{$recipe->content}}</textarea>
+                        </x-form>
+                        <x-form action="/recipes/{{$recipe->id}}/delete" buttonText="Delete">
+                            @method('delete')
+                        </x-form>
+                    @endif
+                </x-recipe>
+            @endforeach
+        </section>
+    </main>
+</x-layout>

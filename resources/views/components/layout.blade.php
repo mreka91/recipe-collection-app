@@ -8,7 +8,7 @@
     <title>Recipe app</title>
 </head>
 <body>
-    @yield('content')
+    {{ $slot }}
     <script src="/js/app.js"></script>
 </body>
 </html>
