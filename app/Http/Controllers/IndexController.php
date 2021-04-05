@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $recipes = DB::table('recipes')->limit(5)->get();
+        $recipes = DB::table('recipes')->orderBy('updated_at', 'desc')->limit(5)->get();
 
         return view('index', [
             'recipes' => $recipes,
