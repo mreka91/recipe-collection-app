@@ -14,3 +14,16 @@
         @endauth
     </div>
 @endif
+
+@if (Route::has('create-recipe'))
+    @auth
+        <form action="create-recipe" method="post" style="width: 300px; display: flex; flex-direction: column; margin-top: 16px;">
+            @csrf
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title">
+            <label for="content">Content</label>
+            <textarea id="content" name="content"></textarea>
+            <button type="submit">Add recipe</button>
+        </form>
+    @endauth
+@endif
