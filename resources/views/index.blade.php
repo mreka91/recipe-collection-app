@@ -1,3 +1,5 @@
+@extends('layout')
+@section('content')
 @if (Route::has('login'))
     <div>
         @auth
@@ -11,7 +13,7 @@
 
 @if (Route::has('create-recipe'))
     @auth
-        <form action="create-recipe" method="post" style="width: 300px; display: flex; flex-direction: column; margin-top: 16px;">
+        <form action="create-recipe" method="post">
             @csrf
             <label for="title">Title</label>
             <input type="text" name="title" id="title">
@@ -25,7 +27,6 @@
 @foreach ($recipes as $recipe)
     <h2>{{$recipe->title}}</h2>
     <p>{{$recipe->content}}</p>
-    <p>Id: {{$recipe->id}}</p>
     @auth
         @if (Auth::id() === $recipe->user_id)
             <form action="/recipes/{{$recipe->id}}/edit" method="post">
@@ -45,3 +46,4 @@
         @endif
     @endauth
 @endforeach
+@endsection
