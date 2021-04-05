@@ -1,9 +1,3 @@
-{{-- @if (Auth::check())
-    Hello {{Auth::user()->name}}! <a href="logout">logout</a>
-@else
-    <a href="login">Click here to login</a>
-@endif --}}
-
 @if (Route::has('login'))
     <div>
         @auth
@@ -27,3 +21,27 @@
         </form>
     @endauth
 @endif
+
+@foreach ($recipes as $recipe)
+    <h2>{{$recipe->title}}</h2>
+    <p>{{$recipe->content}}</p>
+    <p>Id: {{$recipe->id}}</p>
+    @auth
+        @if (Auth::id() === $recipe->user_id)
+            <form action="/recipes/{{$recipe->id}}/edit" method="post">
+                @csrf
+                @method('put')
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" value="{{$recipe->title}}">
+                <label for="content">Content</label>
+                <textarea id="content" name="content">{{$recipe->content}}</textarea>
+                <button type="submit">Edit recipe</button>
+            </form>
+            <form action="/recipes/{{$recipe->id}}/delete" method="post">
+                @csrf
+                @method('delete')
+                <button type="submit">Delete recipe</button>
+            </form>
+        @endif
+    @endauth
+@endforeach
