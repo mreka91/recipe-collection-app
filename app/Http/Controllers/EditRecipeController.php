@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class EditRecipeController extends Controller
 {
-    public function __invoke(Recipe $recipe, Request $request)
+    public function edit(Recipe $recipe, Request $request)
     {
         $this->validate($request, [
             'title' => ['required', 'string', 'max:255'],
@@ -18,6 +18,13 @@ class EditRecipeController extends Controller
         $recipe->content = $request->input('content');
         $recipe->save();
 
-        return back();
+        return back()->with('success', 'You have updated your recipe, yay!');
+    }
+
+    public function get(Recipe $recipe)
+    {
+        return view('edit-recipe', [
+            'recipe' => $recipe,
+        ]);
     }
 }
