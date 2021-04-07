@@ -10,8 +10,7 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $recipes = DB::table('recipes')->orderBy('updated_at', 'desc')->limit(10)->get();
-
+        $recipes = Recipe::select('id', 'title', 'picture_url')->orderBy('updated_at', 'desc')->paginate(5);
         return view('index', [
             'recipes' => $recipes,
         ]);

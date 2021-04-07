@@ -7,5 +7,6 @@
                 <x-recipe-card link="recipes/{{$recipe->id}}/view" title="{{$recipe->title}}" />
             @endforeach
         </section>
+        {{$recipes->links('test')}}
     </main>
 </x-layout>
