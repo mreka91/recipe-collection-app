@@ -29,7 +29,7 @@ class LoginTest extends TestCase
         ]);
         $this->assertAuthenticatedAs($user);
         $response->assertViewIs('index');
-        $response->assertSeeText("Hello $user->name!");
+        $response->assertSeeText($user->name);
     }
 
     public function test_login_user_with_wrong_password()

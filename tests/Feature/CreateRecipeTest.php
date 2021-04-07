@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class CreateRecipeTest extends TestCase
@@ -13,7 +15,7 @@ class CreateRecipeTest extends TestCase
     public function test_view_create_recipe_form()
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/');
+        $response = $this->actingAs($user)->get('/create-recipe');
         $response->assertSeeText("Title");
     }
 
@@ -26,14 +28,19 @@ class CreateRecipeTest extends TestCase
 
     public function test_add_new_recipe()
     {
+        Storage::fake('images');
         $user = User::factory()->create();
         $title = "Test recipe";
         $content = "Test content";
+        $picture = UploadedFile::fake()->image('food.jpg');
 
         $this->actingAs($user)->post('create-recipe', [
             'title' => $title,
             'content' => $content,
+            'image' => $picture,
         ]);
+
+        Storage::assertExists($picture->hashName());
 
         $this->assertDatabaseHas('recipes', [
             'id' => 1,

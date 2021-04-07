@@ -14,13 +14,13 @@ a {
     color: inherit;
 }
 
-nav {
+.navigation {
     height: 48px;
     background-color: black;
     color: white;
 }
 
-nav ul {
+.navigation ul {
     height: inherit;
     padding: 0;
     margin: 0;
@@ -30,11 +30,11 @@ nav ul {
     align-items: center;
 }
 
-nav ul span {
+.navigation ul span {
     display: flex;
 }
 
-nav ul li {
+.navigation ul li {
     margin: 8px;
     padding: 8px;
 }

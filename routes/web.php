@@ -10,16 +10,19 @@ use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\ViewRecipeController;
 use Illuminate\Support\Facades\Route;
 
-// Route::view('/', 'index');
 Route::get('/', IndexController::class);
+Route::get('recipes/{recipe}/view', ViewRecipeController::class);
+Route::get('logout', LogoutController::class)->middleware('auth');
+Route::get('recipes/{recipe}/edit', [EditRecipeController::class, 'get'])->middleware('auth');
+
 Route::view('login', 'login')->middleware('guest')->name('login');
 Route::view('signup', 'signup')->middleware('guest')->name('signup');
 Route::view('create-recipe', 'create-recipe')->middleware('auth');
+
 Route::post('login', LoginController::class);
 Route::post('signup', RegisterUserController::class);
 Route::post('create-recipe', CreateRecipeController::class)->middleware('auth');
-Route::get('logout', LogoutController::class)->middleware('auth');
-Route::get('recipes/{recipe}/edit', [EditRecipeController::class, 'get'])->middleware('auth');
+
 Route::put('recipes/{recipe}/edit', [EditRecipeController::class, 'edit'])->middleware('auth');
-Route::get('recipes/{recipe}/view', ViewRecipeController::class);
+
 Route::delete('recipes/{recipe}/delete', DeleteRecipeController::class)->middleware('auth');
