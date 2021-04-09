@@ -13,6 +13,7 @@ class ViewRecipeController extends Controller
     {
         return view('view-recipe', [
             'recipe' => $recipe,
+            'author' => $recipe->author,
         ]);
     }
 }

@@ -54,6 +54,12 @@ return [
 
     ],
 
+    'testing' => [
+        'driver' => 'local',
+        'root' => storage_path('framework/testing/disks/'),
+        'visibility' => 'public',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Symbolic Links
@@ -66,7 +72,7 @@ return [
     */
 
     'links' => [
-        // public_path('storage') => storage_path('app/public'),
+        public_path('storage') => storage_path('app/public'),
         public_path('images') => storage_path('app/images'),
     ],
 
