@@ -1,14 +1,13 @@
 <nav class="navigation">
     <ul>
         <span>
-            <li>Item one</li>
-            <li>Item two</li>
+            <li><a href="/">Home</a></li>
         </span>
         @if (Route::has('login'))
             <span class="profile">
                 @auth
                 <li>
-                    <a href="">{{Auth::user()->name}}</a>
+                    <a href="/users/{{Auth::user()->id}}/view">{{Auth::user()->name}}</a>
                 </li>
                 <li>
                     <a href="logout">Logout</a>
