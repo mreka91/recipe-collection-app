@@ -1,12 +1,11 @@
 <x-layout>
     <x-navigation/>
+    {{$recipes->links('test')}}
     <main>
-        <a href="create-recipe">Add new recipe</a>
         <section class="recipes">
             @foreach ($recipes as $recipe)
-                <x-recipe-card link="recipes/{{$recipe->id}}/view" title="{{$recipe->title}}" />
+                <x-recipe-card link="/recipes/{{$recipe->id}}/view" title="{{$recipe->title}}" />
             @endforeach
         </section>
-        {{$recipes->links('test')}}
     </main>
 </x-layout>

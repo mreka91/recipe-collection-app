@@ -28,19 +28,19 @@ class CreateRecipeTest extends TestCase
 
     public function test_add_new_recipe()
     {
-        Storage::fake('images');
+        // Storage::fake('images');
         $user = User::factory()->create();
         $title = "Test recipe";
         $content = "Test content";
-        $picture = UploadedFile::fake()->image('food.jpg');
+        // $picture = UploadedFile::fake()->image('food.jpg');
+        // Storage::assertExists($picture->hashName());
 
         $this->actingAs($user)->post('create-recipe', [
             'title' => $title,
             'content' => $content,
-            'image' => $picture,
+            // 'image' => $picture,
         ]);
 
-        Storage::assertExists($picture->hashName());
 
         $this->assertDatabaseHas('recipes', [
             'id' => 1,
