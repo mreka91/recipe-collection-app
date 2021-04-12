@@ -1,17 +1,23 @@
 <x-layout>
     <x-navigation />
-    <section>
-        <img src="{{asset($recipe->picture_url)}}">
-        <h2>{{$recipe->title}}</h2>
-        <p>{{$recipe->content}}</p>
-        <a href="/users/{{$author->id}}/view">{{$author->name}}</a>
-    </section>
-    @auth
+    @if ($recipe->picture_url)
+        <img src="{{asset($recipe->picture_url)}}" class="w-full h-64 object-cover">
+    @endif
+    <section class="p-4">
+        <h2 class="text-3xl">{{$recipe->title}}</h2>
+        <p class="max-w-lg mt-4">{{$recipe->content}}</p>
+        <a href="/users/{{$author->id}}/view" class="inline-block w-max px-4 py-2 mt-2 font-bold text-white bg-green-700 rounded-full hover:bg-green-300 focus:shadow-outline">{{$author->name}}</a>
+        @auth
         @if (Auth::id() === $recipe->user_id)
-            <a href="edit">Edit</a>
-            <x-form action="/recipes/{{$recipe->id}}/delete" buttonText="Delete">
-                @method('delete')
-            </x-form>
+            <div class="flex flex-row mt-8"></div>
+                <a href="edit" class="inline-block w-max px-4 py-2 mt-2 mr-2 font-bold text-white bg-blue-700 rounded-full hover:bg-blue-300 focus:shadow-outline my-4">Edit</a>
+                <form action="/recipes/{{$recipe->id}}/delete" method="post">
+                    @csrf
+                    @method('delete')
+                    <button class="inline-block w-max px-4 py-2 mt-2 mr-2 font-bold text-white bg-red-700 rounded-full hover:bg-red-300 focus:shadow-outline my-4" type="submit">Delete recipe</button>
+                </form>
+            </div>
         @endif
-    @endauth
+        @endauth
+    </section>
 </x-layout>

@@ -10,11 +10,11 @@
                     <a href="/users/{{Auth::user()->id}}/view">{{Auth::user()->name}}</a>
                 </li>
                 <li>
-                    <a href="logout">Logout</a>
+                    <a href="/logout">Logout</a>
                 </li>
                 @else
                 <li>
-                    <a href="login">Login</a>
+                    <a href="/login">Login</a>
                 </li>
                 @endauth
             </span>

@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
     box-sizing: border-box;
 }
@@ -9,10 +13,10 @@ body {
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-a {
+/* a {
     text-decoration: none;
     color: inherit;
-}
+} */
 
 .navigation {
     height: 48px;
@@ -39,14 +43,14 @@ a {
     padding: 8px;
 }
 
-section.recipes {
+/* section.recipes {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-}
+} */
 
-.recipe {
+/* .recipe {
     margin: 8px;
     padding: 16px;
     background-color: khaki;
     border-radius: 8px;
-}
+} */
