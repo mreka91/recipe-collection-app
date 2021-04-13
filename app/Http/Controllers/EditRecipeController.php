@@ -11,7 +11,6 @@ class EditRecipeController extends Controller
 {
     public function edit(Recipe $recipe, Request $request)
     {
-
         $response = Gate::inspect('update-recipe', $recipe);
 
         if (!$response->allowed()) {
