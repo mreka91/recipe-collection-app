@@ -13,11 +13,11 @@ class RecipePolicy
 
     public function update(User $user, Recipe $recipe)
     {
-        return $user->id === $recipe->user_id ? Response::allow() : Response::deny("Not your recipe");
+        return (int)$user->id === (int)$recipe->user_id ? Response::allow() : Response::deny("Not your recipe");
     }
 
     public function delete(User $user, Recipe $recipe)
     {
-        return $user->id === $recipe->user_id ? Response::allow() : Response::deny("Not your recipe");
+        return (int)$user->id === (int)$recipe->user_id ? Response::allow() : Response::deny("Not your recipe");
     }
 }

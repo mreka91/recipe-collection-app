@@ -19,26 +19,22 @@ class CreateRecipeTest extends TestCase
         $response->assertSeeText("Title");
     }
 
-    public function test_hide_create_recipe_form_if_not_authenticaded()
+    public function test_redicrect_from_create_recipe_form_if_not_authenticaded()
     {
-        $response = $this->get('/');
+        $response = $this->followingRedirects()->get('/create-recipe');
         $this->assertGuest();
-        $response->assertDontSeeText('title');
+        $response->assertViewIs('login');
     }
 
     public function test_add_new_recipe()
     {
-        // Storage::fake('images');
         $user = User::factory()->create();
         $title = "Test recipe";
         $content = "Test content";
-        // $picture = UploadedFile::fake()->image('food.jpg');
-        // Storage::assertExists($picture->hashName());
 
         $this->actingAs($user)->post('create-recipe', [
             'title' => $title,
             'content' => $content,
-            // 'image' => $picture,
         ]);
 
 
@@ -57,5 +53,8 @@ class CreateRecipeTest extends TestCase
             'content' => 'Test content',
         ]);
         $response->assertViewIs('index');
+        $this->assertDatabaseHas('recipes', [
+            'title' => 'Test title',
+        ]);
     }
 }

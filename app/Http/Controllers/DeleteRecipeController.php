@@ -11,7 +11,7 @@ class DeleteRecipeController extends Controller
 {
     public function __invoke(Recipe $recipe)
     {
-        $response = Gate::inspect('delete', $recipe);
+        $response = Gate::inspect('delete-recipe', $recipe);
 
         if ($response->allowed()) {
             Storage::delete($recipe->picture_url);
@@ -19,6 +19,7 @@ class DeleteRecipeController extends Controller
             return redirect('/');
         }
 
-        return back()->withErrors("Not your recipe");
+        // return back()->withErrors("Not your recipe");
+        return abort('401', 'Not your recipe');
     }
 }
