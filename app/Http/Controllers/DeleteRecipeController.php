@@ -19,7 +19,6 @@ class DeleteRecipeController extends Controller
             return redirect('/');
         }
 
-        // return back()->withErrors("Not your recipe");
         return abort('401', 'Not your recipe');
     }
 }

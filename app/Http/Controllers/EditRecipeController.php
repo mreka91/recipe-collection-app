@@ -14,7 +14,6 @@ class EditRecipeController extends Controller
         $response = Gate::inspect('update-recipe', $recipe);
 
         if (!$response->allowed()) {
-            // return back()->withErrors("Not your recipe");
             return abort('401', 'Not your recipe');
         }
 
