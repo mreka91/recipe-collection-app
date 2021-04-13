@@ -11,7 +11,7 @@ class ViewProfileController extends Controller
     {
         return view('view-profile', [
             'user' => $user,
-            'userRecipes' => $user->recipes,
+            'userRecipes' => $user->recipes()->paginate(8),
         ]);
     }
 }
