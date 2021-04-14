@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Recipe extends Model
+class Comment extends Model
 {
     use HasFactory;
 
@@ -14,8 +14,8 @@ class Recipe extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function comments()
+    public function recipe()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Recipe::class);
     }
 }
