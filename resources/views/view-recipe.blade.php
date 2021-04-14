@@ -10,8 +10,8 @@
         <p class="max-w-lg mt-4">{{$recipe->content}}</p>
         <a href="/users/{{$recipe->author->id}}/view" class="inline-block w-max px-4 py-2 mt-2 font-bold text-white bg-green-700 rounded-full hover:bg-green-300 focus:shadow-outline">{{$recipe->author->name}}</a>
         <section class="my-8">
-            @if ($comments)
-                @foreach ($comments as $comment)
+            @if ($recipe->comments)
+                @foreach ($recipe->comments as $comment)
                     <div class="border my-4">
                         <h2 class="text-2xl mb-4">{{$comment->author->name}}</h2>
                         <p class="text-xl">{{$comment->comment}}</p>
