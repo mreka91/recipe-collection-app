@@ -28,6 +28,23 @@
 
 ## Code review
 
+-   You need to add run 'npx mix' in your installation guide, or the CSS won't load.
+-   Uploaded images stretch and become hard to see on medium-to-large screens.
+-   Instead of using multiple controlls for things like DeleteComment and AddComment you could create a CommentController that handles both. (Also applies to create/delete recipe-controllers).
+-   In DeleteCommentController.php you have two return calls on top of each other, of which the redirect one won't run ever.
+-   EditRecipeController should just be RecipeController since it holds multiple functions.
+-   Inside hrefs you can use the route-helper e.g {{ route('user.view', $id) }} to generate URL's based on the route file.
+-   Nice indentation
+-   Nice use of tailwind
+-   Great use of view components
+-   You should wrap authenticated routes in middleware groups so that you don't need to repeat the code.
+-   The create-recipe route could be recipes/create to match the other recipe routes (just for consistency).
+-   You could try to name routes with ->name('') for redirects and the routes helper.
+-   I found a typo in CreateRecipeTest.php on line 23.
+-   You could combine the test files for recipes, similarly as with controllers.
+-   Overall the code looks really clean, can't find much to critique.
+-   Good job!
+
 ## Made by
 
 -   Simon Lindstedt
