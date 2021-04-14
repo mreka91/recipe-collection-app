@@ -17,7 +17,6 @@ class LoginTest extends TestCase
         $response = $this->get('login');
         $response->assertViewIs('login');
         $response->assertSeeText("Email");
-        $response->assertStatus(200);
     }
 
     public function test_login_user()
@@ -59,8 +58,8 @@ class LoginTest extends TestCase
     public function test_redirect_if_user_is_authenticated()
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('login');
-        $response->assertRedirect('/');
-        $response->assertStatus(302);
+        $response = $this->followingRedirects()->actingAs($user)->get('login');
+        $response->assertViewIs('index');
+        $response->assertSeeText('Home');
     }
 }

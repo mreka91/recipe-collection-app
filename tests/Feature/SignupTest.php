@@ -15,7 +15,6 @@ class SignupTest extends TestCase
         $response = $this->get('signup');
         $response->assertViewIs('signup');
         $response->assertSeeText('Username');
-        $response->assertStatus(200);
     }
 
     public function test_signup_and_login_new_user()
@@ -38,24 +37,23 @@ class SignupTest extends TestCase
         $this->assertAuthenticated();
 
         $response->assertViewIs('index');
+        $response->assertSeeText($username);
     }
 
 
     public function test_signup_with_incorrect_input()
     {
-        $response = $this->post('signup', [
+        $this->followingRedirects()->get('signup');
+        $response = $this->followingRedirects()->post('signup', [
             'username' => "",
-            'email' => "",
-            'password' => "",
-            'password_confirmation' => " ",
+        ]);
+
+        $this->assertDatabaseMissing('users', [
+            "username" => "",
         ]);
 
         $this->assertGuest();
-
-        $this->assertDatabaseMissing('users', [
-            "email" => "",
-        ]);
-
-        $response->assertSessionHasErrors();
+        $response->assertViewIs('signup');
+        $response->assertSeeText('The username field is required');
     }
 }

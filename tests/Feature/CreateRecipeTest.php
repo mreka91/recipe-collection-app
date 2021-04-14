@@ -16,6 +16,7 @@ class CreateRecipeTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/create-recipe');
+        $response->assertViewIs('create-recipe');
         $response->assertSeeText("Title");
     }
 
@@ -24,6 +25,7 @@ class CreateRecipeTest extends TestCase
         $response = $this->followingRedirects()->get('/create-recipe');
         $this->assertGuest();
         $response->assertViewIs('login');
+        $response->assertSeeText('Email');
     }
 
     public function test_add_new_recipe()
@@ -36,7 +38,6 @@ class CreateRecipeTest extends TestCase
             'title' => $title,
             'content' => $content,
         ]);
-
 
         $this->assertDatabaseHas('recipes', [
             'id' => 1,
@@ -53,6 +54,7 @@ class CreateRecipeTest extends TestCase
             'content' => 'Test content',
         ]);
         $response->assertViewIs('index');
+        $response->assertSeeText('Home');
         $this->assertDatabaseHas('recipes', [
             'title' => 'Test title',
         ]);
