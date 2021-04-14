@@ -26,6 +26,7 @@ class RecipeFactory extends Factory
             'user_id' => User::factory(),
             'title' => $this->faker->sentence(),
             'content' => implode(", ", $this->faker->paragraphs(3)),
+            'picture_url' => "https://source.unsplash.com/800x600/?food/" . random_int(1, 100),
         ];
     }
 }

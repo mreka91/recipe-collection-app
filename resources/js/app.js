@@ -1,7 +1,4 @@
 // require('./bootstrap');
-
-console.log("Hello js");
-
 const deleteForm = document.querySelector("form.delete");
 
 if (deleteForm) {
