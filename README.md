@@ -14,6 +14,18 @@
 -   As a user I am able to view my profil and my recipes
 -   As a user I am able to view others profiles and their recipes
 
+## Install instructions
+
+1. Clone this repo
+2. cd into the project directory
+3. Configure your `.env` file
+4. Run the following commands:
+    1. `composer update`
+    2. `npm install`
+    3. `php artisan migrate`
+    4. `php artisan storage:link`
+5. Run `php artisan serve` and open the app in your web-browser of choice.
+
 ## Code review
 
 ## Made by
