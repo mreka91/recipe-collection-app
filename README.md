@@ -24,7 +24,9 @@
     2. `npm install`
     3. `php artisan migrate`
     4. `php artisan storage:link`
-5. Run `php artisan serve` and open the app in your web-browser of choice.
+    5. `npm run build`
+    6. `php artisan key:generate`
+5. Run `php artisan serve` & `npm run watch` and open the app in your web-browser of choice.
 
 ## Code review
 
